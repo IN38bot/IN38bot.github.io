@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>INbot</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="clipboard.min.js"></script>
+
+
+
+<script>
+        function busscl(){
+          $("#bussgoal").val("");
+          $("#bussattitude").val("");
+          $("#bussaction").val("");
+          $("#bussresult").val("");
+        }
+        function famicl(){
+          $("#famigoal").val("");
+          $("#famiattitude").val("");
+          $("#famiaction").val("");
+          $("#famiresult").val("");
+        }
+        function perscl(){
+          $("#persgoal").val("");
+          $("#persattitude").val("");
+          $("#persaction").val("");
+          $("#persresult").val("");
+        }
+        function socicl(){
+          $("#socigoal").val("");
+          $("#sociattitude").val("");
+          $("#sociaction").val("");
+          $("#sociresult").val("");
+        }
+        function summarybusscl(){
+          $("#bussresult2").val("");
+          $("#bussexperience").val("");
+          $("#busslearn").val("");
+          $("#bussok").val("");
+          $("#bussnotok").val("");
+          $("#busscomplete").val("");
+        }
+        function summaryfamicl(){
+          $("#famiresult2").val("");
+          $("#famiexperience").val("");
+          $("#familearn").val("");
+          $("#famiok").val("");
+          $("#faminotok").val("");
+          $("#famicomplete").val("");
+        }
+        function summaryperscl(){
+          $("#persresult2").val("");
+          $("#persexperience").val("");
+          $("#perslearn").val("");
+          $("#persok").val("");
+          $("#persnotok").val("");
+          $("#perscomplete").val("");
+        }
+        function summarysocicl(){
+          $("#sociresult2").val("");
+          $("#sociexperience").val("");
+          $("#socilearn").val("");
+          $("#sociok").val("");
+          $("#socinotok").val("");
+          $("#socicomplete").val("");
+        }
+        function pp(){
+          $("#pp1").html($("#ppgoal").val()+"项目  ");
+          $("#pp2").html($("#ppsummary").val()+"项目  ");
+        }
+        $(document).ready(function(){
+
+            var clipboard = new ClipboardJS('#copycontent');
+
+            clipboard.on('success', function(e) {
+                console.log(e);
+            });
+
+            clipboard.on('error', function(e) {
+                console.log(e);
+            });
+            
+
+            $("#name").val(localStorage.getItem("name"));
+            
+            if(localStorage.getItem("ppgoal")==""){
+              $("#ppgoal").val("个人");
+              localStorage.setItem("ppgoal", "个人");
+            }else{
+              $("#ppgoal").val(localStorage.getItem("ppgoal"));
+            }
+            $("#bussgoal").val(localStorage.getItem("bussgoal"));
+            $("#bussattitude").val(localStorage.getItem("bussattitude"));
+            $("#bussaction").val(localStorage.getItem("bussaction"));
+            $("#bussresult").val(localStorage.getItem("bussresult"));
+            $("#famigoal").val(localStorage.getItem("famigoal"));
+            $("#famiattitude").val(localStorage.getItem("famiattitude"));
+            $("#famiaction").val(localStorage.getItem("famiaction"));
+            $("#famiresult").val(localStorage.getItem("famiresult"));
+            $("#persgoal").val(localStorage.getItem("persgoal"));
+            $("#persattitude").val(localStorage.getItem("persattitude"));
+            $("#persaction").val(localStorage.getItem("persaction"));
+            $("#persresult").val(localStorage.getItem("persresult"));
+            $("#socigoal").val(localStorage.getItem("socigoal"));
+            $("#sociattitude").val(localStorage.getItem("sociattitude"));
+            $("#sociaction").val(localStorage.getItem("sociaction"));
+            $("#sociresult").val(localStorage.getItem("sociresult"));
+            
+            if(localStorage.getItem("ppsummary")==""){
+              $("#ppsummary").val("个人");
+              localStorage.setItem("ppsummary", "个人");
+            }else{
+              $("#ppsummary").val(localStorage.getItem("ppsummary"));
+            }
+            $("#ppsummury").val(localStorage.getItem("ppsummury"));
+            $("#bussresult2").val(localStorage.getItem("bussresult2"));
+            $("#bussexperience").val(localStorage.getItem("bussexperience"));
+            $("#busslearn").val(localStorage.getItem("busslearn"));
+            $("#bussok").val(localStorage.getItem("bussok"));
+            $("#bussnotok").val(localStorage.getItem("bussnotok"));
+            $("#busscomplete").val(localStorage.getItem("busscomplete"));
+            $("#famiresult2").val(localStorage.getItem("famiresult2"));
+            $("#famiexperience").val(localStorage.getItem("famiexperience"));
+            $("#familearn").val(localStorage.getItem("familearn"));
+            $("#famiok").val(localStorage.getItem("famiok"));
+            $("#faminotok").val(localStorage.getItem("faminotok"));
+            $("#famicomplete").val(localStorage.getItem("famicomplete"));
+            $("#persresult2").val(localStorage.getItem("persresult2"));
+            $("#persexperience").val(localStorage.getItem("persexperience"));
+            $("#perslearn").val(localStorage.getItem("perslearn"));
+            $("#persok").val(localStorage.getItem("persok"));
+            $("#persnotok").val(localStorage.getItem("persnotok"));
+            $("#perscomplete").val(localStorage.getItem("perscomplete"));
+            $("#sociresult2").val(localStorage.getItem("sociresult2"));
+            $("#sociexperience").val(localStorage.getItem("sociexperience"));
+            $("#socilearn").val(localStorage.getItem("socilearn"));
+            $("#sociok").val(localStorage.getItem("sociok"));
+            $("#socinotok").val(localStorage.getItem("socinotok"));
+            $("#socicomplete").val(localStorage.getItem("socicomplete"));
+
+
+            $('[data-toggle="popover"]').popover();   
+
+            $("#copycontent").click(function(){
+              document.getElementById("goalcontent").select();
+              document.execCommand("copy");
+            });
+
+            $("#submitGoal").click(function(){
+
+                var mydate = new Date();
+                
+                var name = $("#name").val();
+                var time = mydate.getDate()+"日/"+(mydate.getMonth()+1)+"月 星期";
+                var day=new Date().getDay();
+                switch (mydate.getDay())
+                {
+                case 0:
+                time=time+"日";
+                break;
+                case 1:
+                time=time+"一";
+                break;
+                case 2:
+                time=time+"二";
+                break;
+                case 3:
+                time=time+"三";
+                break;
+                case 4:
+                time=time+"四";
+                break;
+                case 5:
+                time=time+"五";
+                break;
+                case 6:
+                time=time+"六";
+                break;
+                }
+                var str = "IN目標call\nlN38名字  "+name+"\n"+time+" 目標call\n\n個人DOA";
+
+                var bussgoal=$("#bussgoal").val();
+                var bussattitude=$("#bussattitude").val();
+                var bussaction=$("#bussaction").val();
+                var bussresult=$("#bussresult").val();
+                if(bussgoal!=""||bussattitude!=""||bussaction!=""||bussresult!=""){
+                    str = str + "\n";
+                    str = str + "事業項目\n";
+                    str = str + "目的: "+bussgoal+"\n";
+                    str = str + "態度: "+bussattitude+"\n";
+                    str = str + "行動: "+bussaction+"\n";
+                    str = str + "結果: "+bussresult+"\n";
+                }
+                
+                var famigoal=$("#famigoal").val();
+                var famiattitude=$("#famiattitude").val();
+                var famiaction=$("#famiaction").val();
+                var famiresult=$("#famiresult").val();
+                if(famigoal!=""||famiattitude!=""||famiaction!=""||famiresult!=""){
+                    str = str + "\n";
+                    str = str + "家庭項目\n";
+                    str = str + "目的: "+famigoal+"\n";
+                    str = str + "態度: "+famiattitude+"\n";
+                    str = str + "行動: "+famiaction+"\n";
+                    str = str + "結果: "+famiresult+"\n";
+                }
+
+                var persgoal=$("#persgoal").val();
+                var persattitude=$("#persattitude").val();
+                var persaction=$("#persaction").val();
+                var persresult=$("#persresult").val();
+                if(persgoal!=""||persattitude!=""||persaction!=""||persresult!=""){
+                    str = str + "\n";
+                    str = str + $("#ppgoal").val()+"项目\n";
+                    str = str + "目的: "+persgoal+"\n";
+                    str = str + "態度: "+persattitude+"\n";
+                    str = str + "行動: "+persaction+"\n";
+                    str = str + "結果: "+persresult+"\n";
+                }
+
+                var socigoal=$("#socigoal").val();
+                var sociattitude=$("#sociattitude").val();
+                var sociaction=$("#sociaction").val();
+                var sociresult=$("#sociresult").val();
+                if(socigoal!=""||sociattitude!=""||sociaction!=""||sociresult!=""){
+                    str = str + "\n";
+                    str = str + "个人社服\n";
+                    str = str + "目的: "+socigoal+"\n";
+                    str = str + "態度: "+sociattitude+"\n";
+                    str = str + "行動: "+sociaction+"\n";
+                    str = str + "結果: "+sociresult+"\n";
+                }
+
+                str = str + "\n我今天投入的能量:"+$("#power").val();
+
+                $("#goalcontent").val(str);
+
+                localStorage.setItem("name", name);
+                localStorage.setItem("bussgoal", bussgoal);
+                localStorage.setItem("bussattitude", bussattitude);
+                localStorage.setItem("bussaction", bussaction);
+                localStorage.setItem("bussresult", bussresult);
+                localStorage.setItem("famigoal", famigoal);
+                localStorage.setItem("famiattitude", famiattitude);
+                localStorage.setItem("famiaction", famiaction);
+                localStorage.setItem("famiresult", famiresult);
+                localStorage.setItem("persgoal", persgoal);
+                localStorage.setItem("persattitude", persattitude);
+                localStorage.setItem("persaction", persaction);
+                localStorage.setItem("persresult", persresult);
+                localStorage.setItem("socigoal", socigoal);
+                localStorage.setItem("sociattitude", sociattitude);
+                localStorage.setItem("sociaction", sociaction);
+                localStorage.setItem("sociresult", sociresult);
+                localStorage.setItem("ppgoal", $("#ppgoal").val());
+
+            });
+
+            $("#submitsummary").click(function(){
+                var mydate = new Date();
+
+                var name = $("#name").val();
+                var time = mydate.getDate()+"日/"+(mydate.getMonth()+1)+"月 星期";
+                var day=new Date().getDay();
+                switch (mydate.getDay())
+                {
+                case 0:
+                time=time+"日";
+                break;
+                case 1:
+                time=time+"一";
+                break;
+                case 2:
+                time=time+"二";
+                break;
+                case 3:
+                time=time+"三";
+                break;
+                case 4:
+                time=time+"四";
+                break;
+                case 5:
+                time=time+"五";
+                break;
+                case 6:
+                time=time+"六";
+                break;
+                }
+                var str = "IN总结call\nlN38名字  "+name+"\n"+time+" 总结call\n\n個人DOA";
+
+                var bussresult2=$("#bussresult2").val();
+                var bussexperience=$("#bussexperience").val();
+                var busslearn=$("#busslearn").val();
+                var bussok=$("#bussok").val();
+                var bussnotok=$("#bussnotok").val();
+                var busscomplete=$("#busscomplete").val();
+                if(bussresult2!=""||bussexperience!=""||busslearn!=""||bussok!=""||bussnotok!=""||busscomplete!=""){
+                    str = str + "\n";
+                    str = str + "事業項目\n";
+                    str = str + "结果: "+bussresult2+"\n";
+                    str = str + "体验: "+bussexperience+"\n";
+                    str = str + "学习: "+busslearn+"\n";
+                    str = str + "行得通: "+bussok+"\n";
+                    str = str + "行不通: "+bussnotok+"\n";
+                    str = str + "完成%: "+busscomplete+"\n";
+                }
+                
+                var famiresult2=$("#famiresult2").val();
+                var famiexperience=$("#famiexperience").val();
+                var familearn=$("#familearn").val();
+                var famiok=$("#famiok").val();
+                var faminotok=$("#faminotok").val();
+                var famicomplete=$("#famicomplete").val();
+                if(famiresult2!=""||famiexperience!=""||familearn!=""||famiok!=""||faminotok!=""||famicomplete!=""){
+                    str = str + "\n";
+                    str = str + "家庭項目\n";
+                    str = str + "结果: "+famiresult2+"\n";
+                    str = str + "体验: "+famiexperience+"\n";
+                    str = str + "学习: "+familearn+"\n";
+                    str = str + "行得通: "+famiok+"\n";
+                    str = str + "行不通: "+faminotok+"\n";
+                    str = str + "完成%: "+famicomplete+"\n";
+                }
+
+                var persresult2=$("#persresult2").val();
+                var persexperience=$("#persexperience").val();
+                var perslearn=$("#perslearn").val();
+                var persok=$("#persok").val();
+                var persnotok=$("#persnotok").val();
+                var perscomplete=$("#perscomplete").val();
+                if(persresult2!=""||persexperience!=""||perslearn!=""||persok!=""||persnotok!=""||perscomplete!=""){
+                    str = str + "\n";
+                    str = str + $("#ppsummary").val()+"項目\n";
+                    str = str + "结果: "+persresult2+"\n";
+                    str = str + "体验: "+persexperience+"\n";
+                    str = str + "学习: "+perslearn+"\n";
+                    str = str + "行得通: "+persok+"\n";
+                    str = str + "行不通: "+persnotok+"\n";
+                    str = str + "完成%: "+perscomplete+"\n";
+                }
+
+                var sociresult2=$("#sociresult2").val();
+                var sociexperience=$("#sociexperience").val();
+                var socilearn=$("#socilearn").val();
+                var sociok=$("#sociok").val();
+                var socinotok=$("#socinotok").val();
+                var socicomplete=$("#socicomplete").val();
+                if(sociresult2!=""||sociexperience!=""||socilearn!=""||sociok!=""||socinotok!=""||socicomplete!=""){
+                    str = str + "\n";
+                    str = str + "个人社服\n";
+                    str = str + "结果: "+sociresult2+"\n";
+                    str = str + "体验: "+sociexperience+"\n";
+                    str = str + "学习: "+socilearn+"\n";
+                    str = str + "行得通: "+sociok+"\n";
+                    str = str + "行不通: "+socinotok+"\n";
+                    str = str + "完成%: "+socicomplete+"\n";
+                }
+
+                $("#goalcontent").val(str);
+                localStorage.setItem("name", name);
+
+                localStorage.setItem("bussresult2", bussresult2);
+                localStorage.setItem("bussexperience", bussexperience);
+                localStorage.setItem("busslearn", busslearn);
+                localStorage.setItem("bussok", bussok);
+                localStorage.setItem("bussnotok", bussnotok);
+                localStorage.setItem("busscomplete", busscomplete);
+                localStorage.setItem("famiresult2", famiresult2);
+                localStorage.setItem("famiexperience", famiexperience);
+                localStorage.setItem("familearn", familearn);
+                localStorage.setItem("famiok", famiok);
+                localStorage.setItem("faminotok", faminotok);
+                localStorage.setItem("famicomplete", famicomplete);
+                localStorage.setItem("persresult2", persresult2);
+                localStorage.setItem("persexperience", persexperience);
+                localStorage.setItem("perslearn", perslearn);
+                localStorage.setItem("persok", persok);
+                localStorage.setItem("persnotok", persnotok);
+                localStorage.setItem("perscomplete", perscomplete);
+                localStorage.setItem("sociresult2", sociresult2);
+                localStorage.setItem("sociexperience", sociexperience);
+                localStorage.setItem("socilearn", socilearn);
+                localStorage.setItem("sociok", sociok);
+                localStorage.setItem("socinotok", socinotok);
+                localStorage.setItem("socicomplete", socicomplete);
+                localStorage.setItem("ppsummary", $("#ppsummary").val());
+
+            });
+            
+
+            
+        });
+        </script>
+
+</head>
+
+<body>
+        <div class="container" style="margin:250px auto;width:250px;">
+                <form>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="名字" id="name">
+                        </div>
+                </form>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">目标Call</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">总结Call</button>
+                 
+                <!-- 模态框 -->
+                <div class="modal fade" id="myModal">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                 
+                      <!-- 模态框头部 -->
+                      <div class="modal-header">
+                        <h4 class="modal-title">目标Call</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+                 
+                      <!-- 模态框主体 -->
+                      <div class="modal-body">
+                          <div class="input-group">
+                              <input  type="text" placeholder="个人" style="width:80px;display: inline-block;" id="ppgoal">
+                              <div class="input-group-append">
+                                  <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#pers" style="margin-right: 10px;" onclick="pp();">项目</button>
+                                </div>
+                              <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#buss" style="margin-right: 10px;">事业</button>
+                              <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#fami" style="margin-right: 10px;">家庭</button>
+                              
+                              <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#soci" style="margin-right: 10px;">个人社服</button>
+                          </div>
+                            
+                            
+
+                            <p></p>
+                                <div id="buss" class="collapse">
+                                    <div class="form-group">
+                                            <label for="usr"><b>事业项目  </b><button type="button" class="btn btn-dark btn-sm" id="busscl" onclick="busscl()">清空</button></br>目的:</label> 
+                                            <textarea class="form-control" rows="2" id="bussgoal"></textarea>
+                                            <label for="usr">態度:</label>
+                                            <input type="text" class="form-control" id="bussattitude">
+                                            <label for="usr">行動:</label>
+                                            <textarea class="form-control" rows="2" id="bussaction"></textarea>
+                                            <label for="usr">結果:</label>
+                                            <textarea class="form-control" rows="2" id="bussresult"></textarea>
+                                    </div>
+                                </div>
+
+                                <div id="fami" class="collapse">
+                                    <div class="form-group">
+                                            <label for="usr"><b>家庭项目  </b><button type="button" class="btn btn-dark btn-sm" id="famicl" onclick="famicl()">清空</button></br>目的:</label>
+                                            <textarea class="form-control" rows="2" id="famigoal"></textarea>
+                                            <label for="usr">態度:</label>
+                                            <input type="text" class="form-control" id="famiattitude">
+                                            <label for="usr">行動:</label>
+                                            <textarea class="form-control" rows="2" id="famiaction"></textarea>
+                                            <label for="usr">結果:</label>
+                                            <textarea class="form-control" rows="2" id="famiresult"></textarea>
+                                    </div>
+                                </div>
+
+                                <div id="pers" class="collapse">
+                                    <div class="form-group">
+                                            <label for="usr"><b id="pp1">个人项目  </b><button type="button" class="btn btn-dark btn-sm" id="perscl" onclick="perscl()">清空</button></br>目的:</label>
+                                            <textarea class="form-control" rows="2" id="persgoal"></textarea>
+                                            <label for="usr">態度:</label>
+                                            <input type="text" class="form-control" id="persattitude">
+                                            <label for="usr">行動:</label>
+                                            <textarea class="form-control" rows="2" id="persaction"></textarea>
+                                            <label for="usr">結果:</label>
+                                            <textarea class="form-control" rows="2" id="persresult"></textarea>
+                                    </div>
+                                </div>
+
+                                <div id="soci" class="collapse">
+                                        <div class="form-group">
+                                                <label for="usr"><b>个人社服  </b><button type="button" class="btn btn-dark btn-sm" id="socicl" onclick="socicl()">清空</button></br>目的:</label>
+                                                <textarea class="form-control" rows="2" id="socigoal"></textarea>
+                                                <label for="usr">態度:</label>
+                                                <input type="text" class="form-control" id="sociattitude">
+                                                <label for="usr">行動:</label>
+                                                <textarea class="form-control" rows="2" id="sociaction"></textarea>
+                                                <label for="usr">結果:</label>
+                                                <textarea class="form-control" rows="2" id="sociresult"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <form>
+                                            <div class="input-group mb-3">
+                                              <div class="input-group-prepend">
+                                                <span class="input-group-text">今天投入能量:</span>
+                                              </div>
+                                              <input type="text" class="form-control" placeholder="power~~" id="power">
+                                            </div>
+                                            
+                                          </form>
+                                    
+                      <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submit" id="submitGoal">提交</button>
+                            </div>
+
+
+                        </div>
+                 
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="modal fade" id="myModal2">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                       
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                              <h4 class="modal-title">总结Call</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                       
+                            <!-- 模态框主体 -->
+                            <div class="modal-body">
+                              <div class="input-group">
+                                  <input  type="text" placeholder="个人" style="width:80px;display: inline-block;" id="ppsummary">
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#summarypers" style="margin-right: 10px;" onclick="pp();">项目</button>
+                                  </div>
+                                  <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#summarybuss" style="margin-right: 10px;">事业</button>
+                                  <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#summaryfami" style="margin-right: 10px;">家庭</button>
+                                  
+                                  
+
+                                  <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#summarysoci" style="margin-right: 10px;">个人社服</button>
+                              </div>
+                                  <p></p>
+                                      <div id="summarybuss" class="collapse">
+                                          <div class="form-group">
+                                                  <label for="usr"><b>事業項目  </b><button type="button" class="btn btn-dark btn-sm"onclick="summarybusscl()">清空</button></br>结果:</label>
+                                                  <textarea class="form-control" rows="2" id="bussresult2"></textarea>
+                                                  <label for="usr">体验:</label>
+                                                  <textarea class="form-control" rows="2" id="bussexperience"></textarea>
+                                                  <label for="usr">学习:</label>
+                                                  <textarea class="form-control" rows="2" id="busslearn"></textarea>
+                                                  <label for="usr">行得通: </label>
+                                                  <textarea class="form-control" rows="2" id="bussok"></textarea>
+                                                  <label for="usr">行不通:  </label>
+                                                  <textarea class="form-control" rows="2" id="bussnotok"></textarea>
+                                                  <label for="usr">完成%:</label>
+                                                  <input type="text" class="form-control" id="busscomplete">
+                                          </div>
+                                      </div>
+      
+                                      <div id="summaryfami" class="collapse">
+                                          <div class="form-group">
+                                                  <label for="usr"><b>家庭项目  </b><button type="button" class="btn btn-dark btn-sm" onclick="summaryfamicl()">清空</button></br>结果:</label>
+                                                  <textarea class="form-control" rows="2" id="famiresult2"></textarea>
+                                                  <label for="usr">体验:</label>
+                                                  <textarea class="form-control" rows="2" id="famiexperience"></textarea>
+                                                  <label for="usr">学习:</label>
+                                                  <textarea class="form-control" rows="2" id="familearn"></textarea>
+                                                  <label for="usr">行得通: </label>
+                                                  <textarea class="form-control" rows="2" id="famiok"></textarea>
+                                                  <label for="usr">行不通:  </label>
+                                                  <textarea class="form-control" rows="2" id="faminotok"></textarea>
+                                                  <label for="usr">完成%:</label>
+                                                  <input type="text" class="form-control" id="famicomplete">
+                                          </div>
+                                      </div>
+      
+                                      <div id="summarypers" class="collapse">
+                                          <div class="form-group">
+                                                  <label for="usr"><b id="pp2">个人项目  </b><button type="button" class="btn btn-dark btn-sm" onclick="summaryperscl()">清空</button></br>结果:</label>
+                                                  <textarea class="form-control" rows="2" id="persresult2"></textarea>
+                                                  <label for="usr">体验:</label>
+                                                  <textarea class="form-control" rows="2" id="persexperience"></textarea>
+                                                  <label for="usr">学习:</label>
+                                                  <textarea class="form-control" rows="2" id="perslearn"></textarea>
+                                                  <label for="usr">行得通: </label>
+                                                  <textarea class="form-control" rows="2" id="persok"></textarea>
+                                                  <label for="usr">行不通:  </label>
+                                                  <textarea class="form-control" rows="2" id="persnotok"></textarea>
+                                                  <label for="usr">完成%:</label>
+                                                  <input type="text" class="form-control" id="perscomplete">
+                                          </div>
+                                      </div>
+      
+                                      <div id="summarysoci" class="collapse">
+                                              <div class="form-group">
+                                                      <label for="usr"><b>个人社服</b><button type="button" class="btn btn-dark btn-sm"  onclick="summarysocicl()">清空</button></br>结果:</label>
+                                                      <textarea class="form-control" rows="2" id="sociresult2"></textarea>
+                                                      <label for="usr">体验:</label>
+                                                  <textarea class="form-control" rows="2" id="sociexperience"></textarea>
+                                                  <label for="usr">学习:</label>
+                                                  <textarea class="form-control" rows="2" id="socilearn"></textarea>
+                                                  <label for="usr">行得通: </label>
+                                                  <textarea class="form-control" rows="2" id="sociok"></textarea>
+                                                  <label for="usr">行不通:  </label>
+                                                  <textarea class="form-control" rows="2" id="socinotok"></textarea>
+                                                  <label for="usr">完成%:</label>
+                                                  <input type="text" class="form-control" id="socicomplete">
+                                              </div>
+                                          </div>
+      
+                            <!-- 模态框底部 -->
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submit" id="submitsummary">提交</button>
+                                  </div>
+      
+      
+                              </div>
+                       
+                          </div>
+                        </div>
+                      </div>
+                
+                <!-- 模态框 -->                
+                <div class="modal fade" id="submit">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                       
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                       
+                            <!-- 模态框主体 -->
+                            <div class="modal-body" id="goalcontentbody">
+                              <div class="form-group">
+                              <textarea class="form-control" rows="15" id="goalcontent" ></textarea>
+                              </div>
+                            </div>
+                       
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                              <button type="button" class="btn btn-secondary" data-clipboard-action="copy" data-clipboard-target="#goalcontent" id="copycontent">复制</button>
+                            </div>
+                       
+                          </div>
+                        </div>
+                      </div>
+              </div>
+
+
+
+</body>
+
+</html>
